@@ -1,6 +1,6 @@
 'use client';
 
-import { type PropsWithChildren, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 
@@ -11,9 +11,8 @@ import { getWebApp } from '@/utils/getWebApp';
 
 import './styles.css';
 
-function RootInner({ children }: PropsWithChildren) {
-  const webApp = getWebApp();
-  const debug = webApp.initDataUnsafe.start_param === 'debug';
+function RootInner({ children }) {
+  const debug = getWebApp().initDataUnsafe.start_param === 'debug';
   const manifestUrl = useMemo(() => {
     return new URL('tonconnect-manifest.json', window.location.href).toString();
   }, []);
@@ -28,8 +27,8 @@ function RootInner({ children }: PropsWithChildren) {
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <AppRoot
-        appearance={webApp.colorScheme}
-        platform={['macos', 'ios'].includes(webApp.platform) ? 'ios' : 'base'}
+        appearance={getWebApp().colorScheme}
+        platform={['macos', 'ios'].includes(getWebApp().platform) ? 'ios' : 'base'}
       >
         {children}
       </AppRoot>
@@ -37,7 +36,7 @@ function RootInner({ children }: PropsWithChildren) {
   );
 }
 
-export function Root(props: PropsWithChildren) {
+export function Root(props) {
   // Unfortunately, Telegram Mini Apps does not allow us to use all features of the Server Side
   // Rendering. That's why we are showing loader on the server side.
   const didMount = useDidMount();

@@ -2,21 +2,19 @@
 
 import { List } from '@telegram-apps/telegram-ui';
 
+import { DisplayData } from '@/components/DisplayData/DisplayData.jsx';
 import { getWebApp } from '@/utils/getWebApp';
-import { DisplayData } from '@/components/DisplayData/DisplayData';
 
 export default function ThemeParamsPage() {
-  const webApp = getWebApp();
-
   return (
     <List>
       <DisplayData
         rows={
           Object
-            .entries(webApp.themeParams)
+            .entries(getWebApp().themeParams)
             .map(([title, value]) => ({ title, value }))
         }
       />
     </List>
   );
-};
+}

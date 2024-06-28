@@ -4,7 +4,7 @@ This template demonstrates how developers can implement a web application on the
 Mini Apps platform using the following technologies and libraries:
 
 - [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [TON Connect](https://docs.ton.org/develop/dapps/ton-connect/overview)
 - [Telegram SDK](https://core.telegram.org/bots/webapps#initializing-mini-apps)
 - [Telegram UI](https://github.com/Telegram-Mini-Apps/TelegramUI)

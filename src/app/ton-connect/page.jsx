@@ -1,6 +1,5 @@
 'use client';
 
-import { getWebApp } from '@/utils/getWebApp';
 import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react';
 import {
   Avatar,
@@ -13,23 +12,27 @@ import {
   Title,
 } from '@telegram-apps/telegram-ui';
 
-import { DisplayData } from '@/components/DisplayData/DisplayData';
+import { DisplayData } from '@/components/DisplayData/DisplayData.jsx';
+import { getWebApp } from '@/utils/getWebApp';
 
 import './styles.css';
 
+/**
+ * @returns {import('react').JSX.Element}
+ */
 export default function TONConnectPage() {
   const wallet = useTonWallet();
   if (!wallet) {
     return (
       <Placeholder
-        className="ton-connect-page__placeholder"
-        header="TON Connect"
+        className='ton-connect-page__placeholder'
+        header='TON Connect'
         description={
           <>
             <Text>
               To display the data related to the TON Connect, it is required to connect your wallet
             </Text>
-            <TonConnectButton className="ton-connect-page__button"/>
+            <TonConnectButton className='ton-connect-page__button'/>
           </>
         }
       />
@@ -54,7 +57,7 @@ export default function TONConnectPage() {
           <Section>
             <Cell
               before={
-                <Avatar src={wallet.imageUrl} alt="Provider logo" width={60} height={60}/>
+                <Avatar src={wallet.imageUrl} alt='Provider logo' width={60} height={60}/>
               }
               after={<Navigation>About wallet</Navigation>}
               subtitle={wallet.appName}
@@ -63,14 +66,14 @@ export default function TONConnectPage() {
                 getWebApp().openLink(wallet.aboutUrl);
               }}
             >
-              <Title level="3">{wallet.name}</Title>
+              <Title level='3'>{wallet.name}</Title>
             </Cell>
           </Section>
-          <TonConnectButton className="ton-connect-page__button-connected"/>
+          <TonConnectButton className='ton-connect-page__button-connected'/>
         </>
       )}
       <DisplayData
-        header="Account"
+        header='Account'
         rows={[
           { title: 'Address', value: address },
           { title: 'Chain', value: chain },
@@ -78,7 +81,7 @@ export default function TONConnectPage() {
         ]}
       />
       <DisplayData
-        header="Device"
+        header='Device'
         rows={[
           { title: 'App Name', value: appName },
           { title: 'App Version', value: appVersion },
@@ -95,4 +98,5 @@ export default function TONConnectPage() {
       />
     </List>
   );
-};
+}
+

@@ -2,9 +2,12 @@
 
 import { List } from '@telegram-apps/telegram-ui';
 
-import { DisplayData } from '@/components/DisplayData/DisplayData';
+import { DisplayData } from '@/components/DisplayData/DisplayData.jsx';
 import { getWebApp } from '@/utils/getWebApp';
 
+/**
+ * @returns {import('react').JSX.Element}
+ */
 export default function LaunchParamsPage() {
   const webApp = getWebApp();
 
@@ -21,4 +24,5 @@ export default function LaunchParamsPage() {
       />
     </List>
   );
-};
+}
+

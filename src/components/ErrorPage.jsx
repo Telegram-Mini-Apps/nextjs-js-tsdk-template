@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-export function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset?: () => void
-}) {
+/**
+ * @param {Error & { digest?: string }} error
+ * @param {Function} reset
+ * @returns {import('react').JSX.Element}
+ * @constructor
+ */
+export function ErrorPage({ error, reset }) {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);

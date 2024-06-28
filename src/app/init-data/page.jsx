@@ -2,18 +2,22 @@
 
 import { useMemo } from 'react';
 import { List, Placeholder } from '@telegram-apps/telegram-ui';
-import type { WebAppUser } from '@twa-dev/types';
 
-import { DisplayData, type DisplayDataRow } from '@/components/DisplayData/DisplayData';
+import { DisplayData } from '@/components/DisplayData/DisplayData.jsx';
 import { getWebApp } from '@/utils/getWebApp';
 
-// TODO: @twa-dev/sdk is outdated, as well as @twa-dev/types.
-interface ExactWebAppUser extends WebAppUser {
-  allows_write_to_pm?: boolean;
-  added_to_attachment_menu?: boolean;
-}
+// TODO: @twa-dev/types is outdated.
+/**
+ * @typedef {import('@twa-dev/types').WebAppUser} ExactWebAppUser
+ * @property {boolean} [allows_write_to_pm]
+ * @property {boolean} [added_to_attachment_menu]
+ */
 
-function getUserRows(user: ExactWebAppUser): DisplayDataRow[] {
+/**
+ * @param {ExactWebAppUser} user
+ * @returns {DisplayDataRow[]}
+ */
+function getUserRows(user) {
   return [
     { title: 'id', value: user.id.toString() },
     { title: 'username', value: user.username },
@@ -28,12 +32,15 @@ function getUserRows(user: ExactWebAppUser): DisplayDataRow[] {
   ];
 }
 
+/**
+ * @returns {import('react').JSX.Element}
+ */
 export default function InitDataPage() {
   const webApp = getWebApp();
   const initDataRaw = webApp.initData;
   const initData = webApp.initDataUnsafe;
 
-  const initDataRows = useMemo<DisplayDataRow[] | undefined>(() => {
+  const initDataRows = useMemo(() => {
     if (!initData || !initDataRaw) {
       return;
     }
@@ -59,15 +66,15 @@ export default function InitDataPage() {
     ];
   }, [initData, initDataRaw]);
 
-  const userRows = useMemo<DisplayDataRow[] | undefined>(() => {
+  const userRows = useMemo(() => {
     return initData && initData.user ? getUserRows(initData.user) : undefined;
   }, [initData]);
 
-  const receiverRows = useMemo<DisplayDataRow[] | undefined>(() => {
+  const receiverRows = useMemo(() => {
     return initData && initData.receiver ? getUserRows(initData.receiver) : undefined;
   }, [initData]);
 
-  const chatRows = useMemo<DisplayDataRow[] | undefined>(() => {
+  const chatRows = useMemo(() => {
     if (!initData?.chat) {
       return;
     }
@@ -104,4 +111,4 @@ export default function InitDataPage() {
       {chatRows && <DisplayData header={'Chat'} rows={chatRows}/>}
     </List>
   );
-};
+}
